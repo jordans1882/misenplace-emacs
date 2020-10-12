@@ -729,7 +729,7 @@
   ;; binding ",e" for emacs
   (defun edit-config ()
     (interactive)
-    (find-file "~/git_repos/misenplace-config/misenplace.el"))
+    (find-file "~/git_repos/misenplace-emacs/misenplace.el"))
   (defun edit-yas-config ()
     (interactive)
     (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
