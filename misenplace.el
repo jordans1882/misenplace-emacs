@@ -254,7 +254,7 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-startup-banner "~/git_repos/misenplace/assets/mise_en_place.png"))
+  (setq dashboard-startup-banner "~/git_repos/misenplace-emacs/assets/mise_en_place.png"))
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
