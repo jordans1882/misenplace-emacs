@@ -1245,6 +1245,7 @@ R-FUNC: An R function to use on object"
 (define-key lisp-interaction-mode-map (kbd "<C-return>") 'eval-defun)
 
 ;; Global bindings
+(define-key global-map (kbd "C-=") 'text-scale-increase)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-h") 'evil-window-left)
