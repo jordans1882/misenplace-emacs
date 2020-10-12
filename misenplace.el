@@ -312,12 +312,10 @@
    ;; (evil-define-key 'normal evil-normal-state-map "," 'my-leader-map)
 
    )
-
 (use-package evil-snipe
   :config
   (evil-snipe-mode +1)
   (evil-snipe-override-mode +1))
-
 (use-package evil-nerd-commenter)
 (use-package ess
   :config
@@ -423,7 +421,6 @@
   ;; For bibtex
   (with-eval-after-load "bibtex"
     (add-hook 'bibtex-mode-hook 'lsp)))
-
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
 (use-package mpc)
@@ -732,7 +729,7 @@
   ;; binding ",e" for emacs
   (defun edit-config ()
     (interactive)
-    (find-file "~/git_repos/misenplace/misenplace.el"))
+    (find-file "~/git_repos/misenplace-config/misenplace.el"))
   (defun edit-yas-config ()
     (interactive)
     (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
