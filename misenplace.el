@@ -1633,6 +1633,17 @@ BUFFER may be a string or nil."
       (set-frame-parameter nil 'alpha '(100 100))
     (set-frame-parameter nil 'alpha '(85 50))))
 
+(defun day ()
+  (interactive)
+  (counsel-load-theme-action "doom-gruvbox-light"))
+
+(defun night ()
+  (interactive)
+  (counsel-load-theme-action "doom-gruvbox"))
+
+
+
+
 
 (provide 'misenplace)
 ;;; misenplace.el ends here
