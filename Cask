@@ -29,6 +29,7 @@
  (depends-on "doom-modeline")
  (depends-on "dumb-jump")
  (depends-on "drag-stuff")
+ (depends-on "egg-timer")
  (depends-on "ecukes")
  (depends-on "ein")
  (depends-on "elscreen")

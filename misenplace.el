@@ -266,6 +266,7 @@
   :ensure)
 (use-package ein)
 (use-package eglot)
+(use-package egg-timer)
 (use-package elpy
   :ensure t
   :init
@@ -296,6 +297,11 @@
    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
    (define-key evil-normal-state-map (kbd "q") 'evil-delete-buffer)
    (define-key evil-normal-state-map (kbd "Q") 'evil-record-macro)
+
+   (define-key evil-normal-state-map (kbd "H-l") 'evil-window-increase-width)
+   (define-key evil-normal-state-map (kbd "H-h") 'evil-window-decrease-width)
+   (define-key evil-normal-state-map (kbd "H-j") 'evil-window-increase-height)
+   (define-key evil-normal-state-map (kbd "H-k") 'evil-window-decrease-height)
 
    ;; TODO: find another binding for evil comment or some other binding to finish git commits
    ;; (i.e with-editor-finish)
@@ -1251,6 +1257,14 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "C-k") 'evil-window-up)
 
 
+
+;; (define-key global-map (kbd "C-w C-l") 'evil-window-increase-width)
+;; (define-key global-map (kbd "C-w C-h") 'evil-window-decrease-width)
+;; (define-key global-map (kbd "C-w C-j") 'evil-window-increase-height)
+;; (define-key global-map (kbd "C-w C-k") 'evil-window-decrease-height)
+
+
+
 ;; Org mode bindings
 (define-key org-mode-map (kbd "C-h") 'evil-window-left)
 (define-key org-mode-map (kbd "C-l") 'evil-window-right)
@@ -1640,9 +1654,6 @@ BUFFER may be a string or nil."
 (defun night ()
   (interactive)
   (counsel-load-theme-action "doom-gruvbox"))
-
-
-
 
 
 (provide 'misenplace)
