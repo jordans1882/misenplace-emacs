@@ -11,6 +11,7 @@
  (depends-on "undo-tree" :git "http://www.dr-qubit.org/git/undo-tree.git")
  (depends-on "xelb" :git "https://github.com/ch11ng/xelb.git")
  (depends-on "alert" :git "https://github.com/jwiegley/alert.git")
+ (depends-on "alarm-clock")
  (depends-on "auctex")
  (depends-on "auctex-latexmk")
  (depends-on "auto-complete")

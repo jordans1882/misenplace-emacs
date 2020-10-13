@@ -49,6 +49,7 @@
   :commands (alert)
   :init
   (setq alert-default-style 'notifier))
+(use-package alarm-clock)
 (use-package all-the-icons-ivy-rich
   :ensure t
   :init (all-the-icons-ivy-rich-mode 1))
