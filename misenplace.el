@@ -277,6 +277,7 @@
 ;;   ;; To use MELPA Stable use ":pin mepla-stable",
 ;;   :pin melpa
 ;;   :commands (esup))
+(use-package eglot)
 (use-package evil
    :config
    (evil-mode 1)
@@ -374,6 +375,10 @@
 
   ;; If you would like to use git-gutter.el and linum-mode
   ;;(git-gutter:linum-setup)
+  )
+(use-package git-auto-commit-mode
+  config:
+  (setq gac-automatically-push-p 1)
   )
 (use-package ivy
   :config
@@ -701,7 +706,8 @@
 
   ;; binding ",a" for agenda (todo manager)
   (define-key my-leader-map "a" '("agenda-prefix"))
-  (define-key my-leader-map "aa" 'counsel-org-clock-context)
+  (define-key my-leader-map "aa" 'org-agenda)
+  (define-key my-leader-map "as" 'org-schedule)
   (define-key my-leader-map "an" 'org-projectile-capture-for-current-project)
   (define-key my-leader-map "acc" 'counsel-org-clock-goto)
   (define-key my-leader-map "aci" 'org-clock-in)

@@ -50,6 +50,7 @@
 ;; (depends-on "frame-cmds")
  (depends-on "flycheck-cask")
  (depends-on "fringe-helper")
+ (depends-on "git-auto-commit-mode")
  (depends-on "git-gutter")
  (depends-on "git-gutter-fringe")
  (depends-on "goto-chg")
