@@ -333,8 +333,8 @@
   :config
   ;; (require 'ess-site) ;; load ESS prolly delete this line
   (setq ess-use-flymake nil) ;; disable Flymake
-  ;; (eval-after-load 'ess
-  ;;                  '(define-key evil-normal-state-map (kbd "<C-return>") 'ess-eval-line-and-step))
+
+  (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "M-<RET>") 'ess-eval-region-or-line-visibly-and-step)))
   ;;(eval-after-load 'ess
   ;;                  '(define-key evil-visual-state-map (kbd "<C-return>") 'ess-eval-region-or-line-visibly-and-step)
 
