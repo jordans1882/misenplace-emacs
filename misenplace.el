@@ -66,6 +66,7 @@
   :config
   (auctex-latexmk-setup))
 (use-package all-the-icons)
+(use-package ac-rtags)
 (use-package ace-jump-mode)
 (use-package cask-mode)
 (use-package cask-mode)
@@ -220,6 +221,9 @@
   (setq conda-env-home-directory (expand-file-name "~/anaconda3")))
 (use-package command-log-mode)
 (use-package company)
+(use-package cmake-ide
+  :config
+  (cmake-ide-setup))
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode))
@@ -378,12 +382,13 @@
   )
 (use-package git-auto-commit-mode
   config:
-  (setq gac-automatically-push-p 1)
+  (setq gac-automatically-push-p "t")
   )
 (use-package ivy
   :config
   (ivy-mode 1)
   )
+(use-package ivy-rtags)
 (use-package lorem-ipsum)
 ;; (use-package lsp-mode
 ;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -620,6 +625,7 @@
   )
 (use-package rainbow-delimiters)
 ;; (use-package vterm)
+(use-package rtags)
 
 (use-package treemacs
   :ensure t
