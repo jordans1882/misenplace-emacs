@@ -221,6 +221,7 @@
   (setq conda-env-home-directory (expand-file-name "~/anaconda3")))
 (use-package command-log-mode)
 (use-package company)
+(use-package company-irony)
 (use-package cmake-ide
   :config
   (cmake-ide-setup))
@@ -389,6 +390,13 @@
   (ivy-mode 1)
   )
 (use-package ivy-rtags)
+(use-package irony
+  config:
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
 (use-package lorem-ipsum)
 ;; (use-package lsp-mode
 ;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -1670,4 +1678,8 @@ BUFFER may be a string or nil."
 
 
 (provide 'misenplace)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
 ;;; misenplace.el ends here
