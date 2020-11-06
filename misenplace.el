@@ -222,9 +222,10 @@
 (use-package command-log-mode)
 (use-package company
   :config
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . company-mode))
-  (add-to-list 'auto-mode-alist '("\\.hpp\\'" . company-mode))
-  (add-to-list 'auto-mode-alist '("\\.cpp\\'" . company-mode)))
+  ;;(add-to-list 'auto-mode-alist '("\\.h\\'" . company-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.hpp\\'" . company-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.cpp\\'" . company-mode))
+  )
 (use-package company-irony)
 (use-package cmake-ide
   :config
@@ -437,20 +438,20 @@
 (use-package helm-swoop)
 (use-package company-lsp :commands company-lsp)
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-latex
-  :commands
-  (with-eval-after-load "tex-mode"
-    (add-hook 'tex-mode-hook 'lsp)
-    (add-hook 'latex-mode-hook 'lsp)
-    (add-hook 'LaTeX-mode-hook 'lsp))
-
-  ;; For YaTeX
-  (with-eval-after-load "yatex"
-    (add-hook 'yatex-mode-hook 'lsp))
-
-  ;; For bibtex
-  (with-eval-after-load "bibtex"
-    (add-hook 'bibtex-mode-hook 'lsp)))
+;; (use-package lsp-latex
+;;   :commands
+;;   (with-eval-after-load "tex-mode"
+;;     (add-hook 'tex-mode-hook 'lsp)
+;;     (add-hook 'latex-mode-hook 'lsp)
+;;     (add-hook 'LaTeX-mode-hook 'lsp))
+;; 
+;;   ;; For YaTeX
+;;   (with-eval-after-load "yatex"
+;;     (add-hook 'yatex-mode-hook 'lsp))
+;; 
+;;   ;; For bibtex
+;;   (with-eval-after-load "bibtex"
+;;     (add-hook 'bibtex-mode-hook 'lsp)))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
 (use-package mpc)
