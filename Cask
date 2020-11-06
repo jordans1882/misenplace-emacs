@@ -24,6 +24,7 @@
  (depends-on "command-log-mode")
  (depends-on "cheatsheet")
  (depends-on "counsel")
+ (depends-on "counsel-gtags")
  (depends-on "counsel-org-clock")
  (depends-on "cmake-ide")
  (depends-on "dash")

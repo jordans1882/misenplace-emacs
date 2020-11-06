@@ -220,7 +220,11 @@
   (setq conda-anaconda-home (expand-file-name "~/anaconda3"))
   (setq conda-env-home-directory (expand-file-name "~/anaconda3")))
 (use-package command-log-mode)
-(use-package company)
+(use-package company
+  :config
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . company-mode))
+  (add-to-list 'auto-mode-alist '("\\.hpp\\'" . company-mode))
+  (add-to-list 'auto-mode-alist '("\\.cpp\\'" . company-mode)))
 (use-package company-irony)
 (use-package cmake-ide
   :config
@@ -336,6 +340,7 @@
   (setq ess-use-flymake nil) ;; disable Flymake
 
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "M-<RET>") 'ess-eval-region-or-line-visibly-and-step)))
+  (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "C-S-<RET>") 'ess-eval-region-or-function-or-paragraph-and-step)))
   ;;(eval-after-load 'ess
   ;;                  '(define-key evil-visual-state-map (kbd "<C-return>") 'ess-eval-region-or-line-visibly-and-step)
 
@@ -1681,5 +1686,18 @@ BUFFER may be a string or nil."
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
+
+(use-package counsel-gtags
+  :config
+
+    (add-hook 'c-mode-hook 'counsel-gtags-mode)
+    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+
+    (with-eval-after-load 'counsel-gtags
+        (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+        (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+        (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+        (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)))
+
 
 ;;; misenplace.el ends here
