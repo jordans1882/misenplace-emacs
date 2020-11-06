@@ -387,7 +387,7 @@
   ;;(git-gutter:linum-setup)
   )
 (use-package git-auto-commit-mode
-  config:
+  :config
   (setq gac-automatically-push-p "t")
   )
 (use-package ivy
@@ -396,7 +396,7 @@
   )
 (use-package ivy-rtags)
 (use-package irony
-  config:
+  :config
     (add-hook 'c++-mode-hook 'irony-mode)
     (add-hook 'c-mode-hook 'irony-mode)
     (add-hook 'objc-mode-hook 'irony-mode)
