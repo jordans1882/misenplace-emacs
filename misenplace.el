@@ -1692,11 +1692,11 @@ BUFFER may be a string or nil."
 
 (defun day ()
   (interactive)
-  (counsel-load-theme-action "doom-gruvbox-light"))
+  (counsel-load-theme-action "doom-tomorrow-day"))
 
 (defun night ()
   (interactive)
-  (counsel-load-theme-action "doom-gruvbox"))
+  (counsel-load-theme-action "doom-Iosvkem"))
 
 
 (provide 'misenplace)
