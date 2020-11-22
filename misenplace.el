@@ -379,6 +379,7 @@
   :config
   (global-flycheck-mode t)
 )
+(use-package fill-column-indicator)
 (use-package git-gutter
   :config
   ;; If you enable global minor mode
