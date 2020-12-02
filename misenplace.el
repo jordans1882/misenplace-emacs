@@ -1694,6 +1694,14 @@ BUFFER may be a string or nil."
   (interactive)
   (counsel-load-theme-action "doom-tomorrow-day"))
 
+(defun dusk ()
+  (interactive)
+  (counsel-load-theme-action "doom-gruvbox-light"))
+
+(defun evening ()
+  (interactive)
+  (counsel-load-theme-action "doom-gruvbox"))
+
 (defun night ()
   (interactive)
   (counsel-load-theme-action "doom-Iosvkem"))
