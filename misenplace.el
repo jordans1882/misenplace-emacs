@@ -303,6 +303,7 @@
 
    ;; Create user keymap (personal leader)
    (defvar my-leader-map (make-sparse-keymap)
+   (defvar my-localleader-map (make-sparse-keymap)
      "Keymap for \"leader key\" shortcuts.")
 
    (define-key my-leader-map "wd" 'evil-window-delete)
@@ -320,11 +321,13 @@
    ;; (define-key evil-normal-state-map (kbd "C-c C-c") 'evilnc-comment-or-uncomment-lines)
    ;; binding "," to the keymap
    (define-key evil-normal-state-map "," my-leader-map)
+   (define-key evil-normal-state-map " " my-localleader-map)
    (define-key evil-normal-state-map (kbd "/") 'swiper)
    (define-key evil-normal-state-map (kbd "?") 'swiper-backward)
 
    ;; Manually add in my-leader-map bindings to states
    (define-key compilation-mode-map "," my-leader-map)
+   (define-key compilation-mode-map " " my-leader-map)
 
    ;; (define-key inferior-ess-mode-map "," my-leader-map)
    ;; (evil-define-key 'normal evil-normal-state-map "," 'my-leader-map)
@@ -780,12 +783,31 @@
     (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
   (defun reload-config ()
     (interactive)
-    (load-file "~/git_repos/misenplace/misenplace.el"))
+    (load-file "~/git_repos/misenplace-emacs/misenplace.el"))
 
   ;; binding ",e" for emacs
   (define-key my-leader-map "e" '("evilnc-prefix"))
   (define-key my-leader-map "ec" 'evilnc-comment-or-uncomment-lines)
 
+
+  ;; binding ",f" for files
+  (define-key my-localleader-map "f" '("files-prefix"))
+  (define-key my-localleader-map "ff" 'treemacs)
+  (define-key my-localleader-map "fc" 'treemacs-create-file)
+  (define-key my-localleader-map "fC" 'treemacs-create-dir)
+  (define-key my-localleader-map "fd" 'treemacs-delete)
+  (define-key my-localleader-map "feb" 'edit-bashrc)
+  (define-key my-localleader-map "fea" 'edit-awesomerc)
+  (define-key my-localleader-map "fee" 'edit-config)
+  (define-key my-localleader-map "feq" 'edit-qutebrowser)
+  (define-key my-localleader-map "fer" 'reload-config)
+  (define-key my-localleader-map "fev" 'edit-vimrc)
+  (define-key my-localleader-map "fey" 'edit-yas-config)
+  (define-key my-localleader-map "fq" 'treemacs-quit)
+  (define-key my-localleader-map "fs" 'treemacs-visit-node-horizontal-split)
+  (define-key my-localleader-map "fv" 'treemacs-visit-node-vertical-split)
+
+  
   ;; binding ",f" for files
   (define-key my-leader-map "f" '("files-prefix"))
   (define-key my-leader-map "ff" 'treemacs)
