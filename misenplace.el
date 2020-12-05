@@ -1747,4 +1747,6 @@ BUFFER may be a string or nil."
         (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)))
 
 
+(setq vc-follow-symlinks "t")
+
 ;;; misenplace.el ends here
