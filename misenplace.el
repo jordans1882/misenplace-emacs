@@ -1099,7 +1099,7 @@ R-FUNC: An R function to use on object"
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   )
 
-(defun make-r-project ()
+(defun make-python-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
   (setq cpp-template-repo "git@github.com:jordans1882/pytemplate.git")
