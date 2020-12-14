@@ -1050,6 +1050,8 @@ R-FUNC: An R function to use on object"
 (use-package sublimity)
 
 ;; User-defined functions
+
+;; Project creation functions
 (defun make-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1061,9 +1063,59 @@ R-FUNC: An R function to use on object"
   (with-temp-file readme "")
   (with-temp-file todo "")
   (projectile-add-known-project projectdir)
-  (treemacs-add-project-to-workspace projectdir projectname)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   (magit-init projectdir)
   )
+
+(defun make-cpp-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/templatepp.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+
+(defun make-r-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/templater.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+
+(defun make-r-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/pytemplate.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+;; TODO: Update python git repo for python projects
+
 
 ;; Basic Configuration
 (defun basic-config ()
