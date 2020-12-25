@@ -1003,6 +1003,7 @@ R-FUNC: An R function to use on object"
   (define-key my-leader-map "wL" 'evil-window-increase-width))
   (define-key my-leader-map "w-" 'evil-window-split)
   (define-key my-leader-map "w|" 'evil-window-vsplit)
+  (define-key my-leader-map "w=" 'balance-windows)
 (use-package yasnippet
   :config
   (yas-global-mode 1)
