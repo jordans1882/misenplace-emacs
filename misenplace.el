@@ -66,6 +66,7 @@
   :config
   (auctex-latexmk-setup))
 (use-package all-the-icons)
+(use-package ac-rtags)
 (use-package ace-jump-mode)
 (use-package cask-mode)
 (use-package cask-mode)
@@ -219,7 +220,16 @@
   (setq conda-anaconda-home (expand-file-name "~/anaconda3"))
   (setq conda-env-home-directory (expand-file-name "~/anaconda3")))
 (use-package command-log-mode)
-(use-package company)
+(use-package company
+  :config
+  ;;(add-to-list 'auto-mode-alist '("\\.h\\'" . company-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.hpp\\'" . company-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.cpp\\'" . company-mode))
+  )
+(use-package company-irony)
+(use-package cmake-ide
+  :config
+  (cmake-ide-setup))
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode))
@@ -236,7 +246,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
+  (load-theme 'doom-tomorrow-day t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -295,6 +305,8 @@
    ;; Create user keymap (personal leader)
    (defvar my-leader-map (make-sparse-keymap)
      "Keymap for \"leader key\" shortcuts.")
+   (defvar my-localleader-map (make-sparse-keymap)
+     "Keymap for \"leader key\" shortcuts.")
 
    (define-key my-leader-map "wd" 'evil-window-delete)
    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-page-up)
@@ -311,11 +323,13 @@
    ;; (define-key evil-normal-state-map (kbd "C-c C-c") 'evilnc-comment-or-uncomment-lines)
    ;; binding "," to the keymap
    (define-key evil-normal-state-map "," my-leader-map)
+   (define-key evil-normal-state-map " " my-localleader-map)
    (define-key evil-normal-state-map (kbd "/") 'swiper)
    (define-key evil-normal-state-map (kbd "?") 'swiper-backward)
 
    ;; Manually add in my-leader-map bindings to states
    (define-key compilation-mode-map "," my-leader-map)
+   (define-key compilation-mode-map " " my-localleader-map)
 
    ;; (define-key inferior-ess-mode-map "," my-leader-map)
    ;; (evil-define-key 'normal evil-normal-state-map "," 'my-leader-map)
@@ -332,6 +346,7 @@
   (setq ess-use-flymake nil) ;; disable Flymake
 
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "M-<RET>") 'ess-eval-region-or-line-visibly-and-step)))
+  (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "C-S-<RET>") 'ess-eval-region-or-function-or-paragraph-and-step)))
   ;;(eval-after-load 'ess
   ;;                  '(define-key evil-visual-state-map (kbd "<C-return>") 'ess-eval-region-or-line-visibly-and-step)
 
@@ -369,6 +384,7 @@
   :config
   (global-flycheck-mode t)
 )
+(use-package fill-column-indicator)
 (use-package git-gutter
   :config
   ;; If you enable global minor mode
@@ -378,13 +394,21 @@
   ;;(git-gutter:linum-setup)
   )
 (use-package git-auto-commit-mode
-  config:
-  (setq gac-automatically-push-p 1)
+  :config
+  (setq gac-automatically-push-p "t")
   )
 (use-package ivy
   :config
   (ivy-mode 1)
   )
+(use-package ivy-rtags)
+(use-package irony
+  :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
 (use-package lorem-ipsum)
 ;; (use-package lsp-mode
 ;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -420,20 +444,20 @@
 (use-package helm-swoop)
 (use-package company-lsp :commands company-lsp)
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-latex
-  :commands
-  (with-eval-after-load "tex-mode"
-    (add-hook 'tex-mode-hook 'lsp)
-    (add-hook 'latex-mode-hook 'lsp)
-    (add-hook 'LaTeX-mode-hook 'lsp))
-
-  ;; For YaTeX
-  (with-eval-after-load "yatex"
-    (add-hook 'yatex-mode-hook 'lsp))
-
-  ;; For bibtex
-  (with-eval-after-load "bibtex"
-    (add-hook 'bibtex-mode-hook 'lsp)))
+;; (use-package lsp-latex
+;;   :commands
+;;   (with-eval-after-load "tex-mode"
+;;     (add-hook 'tex-mode-hook 'lsp)
+;;     (add-hook 'latex-mode-hook 'lsp)
+;;     (add-hook 'LaTeX-mode-hook 'lsp))
+;; 
+;;   ;; For YaTeX
+;;   (with-eval-after-load "yatex"
+;;     (add-hook 'yatex-mode-hook 'lsp))
+;; 
+;;   ;; For bibtex
+;;   (with-eval-after-load "bibtex"
+;;     (add-hook 'bibtex-mode-hook 'lsp)))
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
 (use-package mpc)
@@ -621,7 +645,7 @@
   )
 (use-package rainbow-delimiters)
 ;; (use-package vterm)
-
+(use-package rtags)
 (use-package treemacs
   :ensure t
   :defer t
@@ -744,25 +768,59 @@
   (defun edit-config ()
     (interactive)
     (find-file "~/git_repos/misenplace-emacs/misenplace.el"))
+  (defun edit-bashrc ()
+    (interactive)
+    (find-file "~/.bashrc"))
+  (defun edit-awesomerc ()
+    (interactive)
+    (find-file "~/.config/awesome/rc.lua"))
+  (defun edit-vimrc ()
+    (interactive)
+    (find-file "~/.vimrc"))
+  (defun edit-qutebrowser ()
+    (interactive)
+    (find-file "~/.config/qutebrowser/config.py"))
   (defun edit-yas-config ()
     (interactive)
     (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
   (defun reload-config ()
     (interactive)
-    (load-file "~/git_repos/misenplace/misenplace.el"))
+    (load-file "~/git_repos/misenplace-emacs/misenplace.el"))
 
   ;; binding ",e" for emacs
   (define-key my-leader-map "e" '("evilnc-prefix"))
   (define-key my-leader-map "ec" 'evilnc-comment-or-uncomment-lines)
 
+  ;; binding " f" for files
+  (define-key my-localleader-map "f" '("files-prefix"))
+  (define-key my-localleader-map "ff" 'treemacs)
+  (define-key my-localleader-map "fc" 'treemacs-create-file)
+  (define-key my-localleader-map "fC" 'treemacs-create-dir)
+  (define-key my-localleader-map "fd" 'treemacs-delete)
+  (define-key my-localleader-map "feb" 'edit-bashrc)
+  (define-key my-localleader-map "fea" 'edit-awesomerc)
+  (define-key my-localleader-map "fee" 'edit-config)
+  (define-key my-localleader-map "feq" 'edit-qutebrowser)
+  (define-key my-localleader-map "fer" 'reload-config)
+  (define-key my-localleader-map "fev" 'edit-vimrc)
+  (define-key my-localleader-map "fey" 'edit-yas-config)
+  (define-key my-localleader-map "fq" 'treemacs-quit)
+  (define-key my-localleader-map "fs" 'treemacs-visit-node-horizontal-split)
+  (define-key my-localleader-map "fv" 'treemacs-visit-node-vertical-split)
+
+  
   ;; binding ",f" for files
   (define-key my-leader-map "f" '("files-prefix"))
   (define-key my-leader-map "ff" 'treemacs)
   (define-key my-leader-map "fc" 'treemacs-create-file)
   (define-key my-leader-map "fC" 'treemacs-create-dir)
   (define-key my-leader-map "fd" 'treemacs-delete)
+  (define-key my-leader-map "feb" 'edit-bashrc)
+  (define-key my-leader-map "fea" 'edit-awesomerc)
   (define-key my-leader-map "fee" 'edit-config)
+  (define-key my-leader-map "feq" 'edit-qutebrowser)
   (define-key my-leader-map "fer" 'reload-config)
+  (define-key my-leader-map "fev" 'edit-vimrc)
   (define-key my-leader-map "fey" 'edit-yas-config)
   (define-key my-leader-map "fq" 'treemacs-quit)
   (define-key my-leader-map "fs" 'treemacs-visit-node-horizontal-split)
@@ -993,6 +1051,8 @@ R-FUNC: An R function to use on object"
 (use-package sublimity)
 
 ;; User-defined functions
+
+;; Project creation functions
 (defun make-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1004,9 +1064,59 @@ R-FUNC: An R function to use on object"
   (with-temp-file readme "")
   (with-temp-file todo "")
   (projectile-add-known-project projectdir)
-  (treemacs-add-project-to-workspace projectdir projectname)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   (magit-init projectdir)
   )
+
+(defun make-cpp-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/templatepp.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+
+(defun make-r-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/templater.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+
+(defun make-python-project ()
+  "Prompt user to enter a directory name and create project."
+  (interactive)
+  (setq cpp-template-repo "git@github.com:jordans1882/pytemplate.git")
+  (setq proj-name (read-string "Enter your project name:"))
+  (setq proj-dir (concatenate 'string "~/git_repos/" proj-name))
+  ;; TODO: see if project directory existence check is needed
+  (setq clone-command (concatenate 'string "git clone " cpp-template-repo " " proj-dir))
+  (setq rm-git-command (concatenate 'string "rm -rf " proj-dir "/.git"))
+  (shell-command-to-string clone-command)
+  (shell-command-to-string rm-git-command)
+  (magit-init proj-dir) ;; use hub for this?
+  (projectile-add-known-project proj-dir)
+  ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
+  )
+;; TODO: Update python git repo for python projects
+
 
 ;; Basic Configuration
 (defun basic-config ()
@@ -1657,12 +1767,39 @@ BUFFER may be a string or nil."
 
 (defun day ()
   (interactive)
+  (counsel-load-theme-action "doom-tomorrow-day"))
+
+(defun dusk ()
+  (interactive)
   (counsel-load-theme-action "doom-gruvbox-light"))
 
-(defun night ()
+(defun evening ()
   (interactive)
   (counsel-load-theme-action "doom-gruvbox"))
 
+(defun night ()
+  (interactive)
+  (counsel-load-theme-action "doom-Iosvkem"))
+
 
 (provide 'misenplace)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+(use-package counsel-gtags
+  :config
+
+    (add-hook 'c-mode-hook 'counsel-gtags-mode)
+    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+
+    (with-eval-after-load 'counsel-gtags
+        (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+        (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+        (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+        (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)))
+
+
+(setq vc-follow-symlinks "t")
+
 ;;; misenplace.el ends here
