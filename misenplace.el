@@ -274,6 +274,7 @@
          ("M-g x" . dumb-jump-go-prefer-external)
          ("M-g z" . dumb-jump-go-prefer-external-other-window))
   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   :ensure)
 (use-package ein)
 (use-package eglot)
