@@ -33,6 +33,7 @@
  (depends-on "doom-modeline")
  (depends-on "dumb-jump")
  (depends-on "drag-stuff")
+ (depends-on "edwina")
  (depends-on "egg-timer")
  (depends-on "ecukes")
  (depends-on "ein")

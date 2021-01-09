@@ -276,6 +276,12 @@
   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
     (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   :ensure)
+(use-package edwina
+  :ensure t
+  :config
+  (setq display-buffer-base-action '(display-buffer-below-selected))
+  (edwina-setup-dwm-keys)
+  (edwina-mode 1))
 (use-package ein)
 (use-package eglot)
 (use-package egg-timer)
@@ -751,6 +757,7 @@
   (define-key my-leader-map "bh" 'previous-buffer)
   (define-key my-leader-map "bn" 'evil-buffer-new)
   (define-key my-leader-map "bd" 'evil-delete-buffer)
+  (define-key my-leader-map "br" 'rename-buffer)
 
   ;; binding ",c" for nerd commenter
   (define-key my-leader-map "c" '("comment-prefix"))
@@ -1374,7 +1381,8 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "C-l") 'evil-window-right)
 (define-key global-map (kbd "C-j") 'evil-window-down)
 (define-key global-map (kbd "C-k") 'evil-window-up)
-
+(define-key global-map (kbd "C-J") 'edwina-swap-next-window)
+(define-key global-map (kbd "C-K") 'edwina-swap-previous-window)
 
 
 ;; (define-key global-map (kbd "C-w C-l") 'evil-window-increase-width)
@@ -1802,5 +1810,11 @@ BUFFER may be a string or nil."
 
 
 (setq vc-follow-symlinks "t")
+
+(define-globalized-minor-mode global-hs-minor-mode
+  hs-minor-mode hs-minor-mode)
+
+(global-hs-minor-mode 1)
+
 
 ;;; misenplace.el ends here
