@@ -1811,10 +1811,10 @@ BUFFER may be a string or nil."
 
 (setq vc-follow-symlinks "t")
 
-(define-globalized-minor-mode global-hs-minor-mode
-  hs-minor-mode hs-minor-mode)
-
-(global-hs-minor-mode 1)
+;; (define-globalized-minor-mode global-hs-minor-mode
+;;   hs-minor-mode hs-minor-mode)
+;; 
+;; (global-hs-minor-mode 1)
 
 
 ;;; misenplace.el ends here
