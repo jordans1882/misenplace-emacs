@@ -1377,45 +1377,31 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "C-=") 'text-scale-increase)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
-;; (define-key global-map (kbd "M-h") 'evil-window-left)
-;; (define-key global-map (kbd "M-l") 'evil-window-right)
-;; (define-key global-map (kbd "M-j") 'evil-window-down)
-;; (define-key global-map (kbd "M-k") 'evil-window-up)
-;; (define-key global-map (kbd "M-S-j") 'evil-window-rotate-downwards)
-;; (define-key global-map (kbd "M-S-k") 'evil-window-rotate-upwards)
-;; (define-key global-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
-;; (define-key global-map (kbd "M-S-<tab>") 'tab-bar-switch-to-prev-tab)
-;; (define-key global-map (kbd "M-<RET>") 'open-dashboard-below)
-;; (define-key global-map (kbd "M-S-<RET>") 'open-dashboard-right)
-;; (define-key global-map (kbd "M-left") 'evil-window-decrease-width)
-;; (define-key global-map (kbd "M-right") 'evil-window-increase-width)
-;; (define-key global-map (kbd "M-up") 'evil-window-decrease-height)
-;; (define-key global-map (kbd "M-down") 'evil-window-increase-height)
-;; (define-key global-map (kbd "M-q") 'evil-window-delete)
-;; (define-key global-map (kbd "M-S-c") 'evil-window-delete)
-
+(define-key global-map (kbd "C-h") 'evil-window-left)
+(define-key global-map (kbd "C-l") 'evil-window-right)
+(define-key global-map (kbd "C-j") 'evil-window-down)
+(define-key global-map (kbd "C-k") 'evil-window-up)
 ;; (define-key global-map (kbd "C-S-J") 'edwina-swap-next-window)
 ;; (define-key global-map (kbd "C-S-K") 'edwina-swap-previous-window)
 
 
-;; Bindings can't start w/ C-w???
 ;; (define-key global-map (kbd "C-w C-l") 'evil-window-increase-width)
 ;; (define-key global-map (kbd "C-w C-h") 'evil-window-decrease-width)
 ;; (define-key global-map (kbd "C-w C-j") 'evil-window-increase-height)
 ;; (define-key global-map (kbd "C-w C-k") 'evil-window-decrease-height)
-;; (define-key global-map (kbd "C-w d") 'evil-window-delete)
+
+(define-key global-map (kbd "C-w d") 'evil-window-delete)
+
 
 ;; Org mode bindings
-;; (define-key org-mode-map (kbd "M-h") 'evil-window-left)
-;; (define-key org-mode-map (kbd "M-l") 'evil-window-right)
-;; (define-key org-mode-map (kbd "M-j") 'evil-window-down)
-;; (define-key org-mode-map (kbd "M-k") 'evil-window-up)
-;; (define-key org-mode-map (kbd "M-S-j") 'evil-window-rotate-downwards)
-;; (define-key org-mode-map (kbd "M-S-k") 'evil-window-rotate-upwards)
-;; (define-key org-mode-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
+(define-key org-mode-map (kbd "C-h") 'evil-window-left)
+(define-key org-mode-map (kbd "C-l") 'evil-window-right)
+(define-key org-mode-map (kbd "C-j") 'evil-window-down)
+(define-key org-mode-map (kbd "C-k") 'evil-window-up)
+(define-key org-mode-map (kbd "C-<tab>") 'tab-bar-switch-to-next-tab)
 
 ;; LaTeX mode bindings
-;; (define-key LaTeX-mode-map (kbd "M-j") 'evil-window-down)
+(define-key LaTeX-mode-map (kbd "C-j") 'evil-window-down)
 
 ;; Misenpace-wm setup
 
@@ -1805,16 +1791,6 @@ BUFFER may be a string or nil."
   (interactive)
   (counsel-load-theme-action "doom-Iosvkem"))
 
-
-;; (defun open-dashboard-below ()
-;;   (interactive)
-;;   (switch-to-buffer-other-window "*dashboard*"))
-;; 
-;; (defun open-dashboard-right ()
-;;   (interactive)
-;;   (evil-vsplit)
-;;   (other-window 1)
-;;   (switch-to-buffer-other-window "*dashboard*"))
 
 (provide 'misenplace)
 
