@@ -1398,12 +1398,12 @@ R-FUNC: An R function to use on object"
 ;; (define-key global-map (kbd "C-S-K") 'edwina-swap-previous-window)
 
 
+;; Bindings can't start w/ C-w???
 ;; (define-key global-map (kbd "C-w C-l") 'evil-window-increase-width)
 ;; (define-key global-map (kbd "C-w C-h") 'evil-window-decrease-width)
 ;; (define-key global-map (kbd "C-w C-j") 'evil-window-increase-height)
 ;; (define-key global-map (kbd "C-w C-k") 'evil-window-decrease-height)
-
-(define-key global-map (kbd "C-w d") 'evil-window-delete)
+;; (define-key global-map (kbd "C-w d") 'evil-window-delete)
 
 
 ;; Org mode bindings
