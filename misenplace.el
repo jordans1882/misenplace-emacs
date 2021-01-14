@@ -1390,7 +1390,7 @@ R-FUNC: An R function to use on object"
 ;; (define-key global-map (kbd "C-w C-j") 'evil-window-increase-height)
 ;; (define-key global-map (kbd "C-w C-k") 'evil-window-decrease-height)
 
-(define-key global-map (kbd "C-w d") 'evil-window-delete)
+;; (define-key global-map (kbd "C-w d") 'evil-window-delete)
 
 
 ;; Org mode bindings
