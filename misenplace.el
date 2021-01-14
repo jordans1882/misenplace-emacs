@@ -1383,6 +1383,10 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "M-k") 'evil-window-up)
 (define-key global-map (kbd "M-S-j") 'evil-rotate-upwards)
 (define-key global-map (kbd "M-S-k") 'evil-rotate-downwards)
+(define-key global-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
+(define-key global-map (kbd "M-S-<tab>") 'tab-bar-switch-to-prev-tab)
+(define-key global-map (kbd "M-<RET>") 'open-dashboard-below)
+(define-key global-map (kbd "M-S-<RET>") 'open-dashboard-right)
 ;; (define-key global-map (kbd "C-S-J") 'edwina-swap-next-window)
 ;; (define-key global-map (kbd "C-S-K") 'edwina-swap-previous-window)
 
@@ -1796,6 +1800,17 @@ BUFFER may be a string or nil."
   (interactive)
   (counsel-load-theme-action "doom-Iosvkem"))
 
+(defun open-dashboard-below ()
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (switch-to-buffer "*dashboard*"))
+
+(defun open-dashboard-right ()
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (switch-to-buffer "*dashboard*"))
 
 (provide 'misenplace)
 
