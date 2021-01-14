@@ -1377,9 +1377,9 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "C-=") 'text-scale-increase)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
-(define-key global-map (kbd "C-h") 'evil-window-left)
-(define-key global-map (kbd "C-l") 'evil-window-right)
-(define-key global-map (kbd "C-j") 'evil-window-down)
+(define-key global-map (kbd "M-h") 'evil-window-left)
+(define-key global-map (kbd "M-l") 'evil-window-right)
+(define-key global-map (kbd "M-j") 'evil-window-down)
 (define-key global-map (kbd "C-k") 'evil-window-up)
 ;; (define-key global-map (kbd "C-S-J") 'edwina-swap-next-window)
 ;; (define-key global-map (kbd "C-S-K") 'edwina-swap-previous-window)
@@ -1389,7 +1389,6 @@ R-FUNC: An R function to use on object"
 ;; (define-key global-map (kbd "C-w C-h") 'evil-window-decrease-width)
 ;; (define-key global-map (kbd "C-w C-j") 'evil-window-increase-height)
 ;; (define-key global-map (kbd "C-w C-k") 'evil-window-decrease-height)
-
 ;; (define-key global-map (kbd "C-w d") 'evil-window-delete)
 
 
