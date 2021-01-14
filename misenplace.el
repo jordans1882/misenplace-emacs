@@ -1380,7 +1380,9 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "M-h") 'evil-window-left)
 (define-key global-map (kbd "M-l") 'evil-window-right)
 (define-key global-map (kbd "M-j") 'evil-window-down)
-(define-key global-map (kbd "C-k") 'evil-window-up)
+(define-key global-map (kbd "M-k") 'evil-window-up)
+(define-key global-map (kbd "M-S-j") 'evil-rotate-upwards)
+(define-key global-map (kbd "M-S-k") 'evil-rotate-downwards)
 ;; (define-key global-map (kbd "C-S-J") 'edwina-swap-next-window)
 ;; (define-key global-map (kbd "C-S-K") 'edwina-swap-previous-window)
 
