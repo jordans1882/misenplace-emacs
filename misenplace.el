@@ -1395,11 +1395,15 @@ R-FUNC: An R function to use on object"
 
 
 ;; Org mode bindings
+
+;; Consider removal...
 (define-key org-mode-map (kbd "C-h") 'evil-window-left)
 (define-key org-mode-map (kbd "C-l") 'evil-window-right)
 (define-key org-mode-map (kbd "C-j") 'evil-window-down)
 (define-key org-mode-map (kbd "C-k") 'evil-window-up)
-(define-key org-mode-map (kbd "C-<tab>") 'tab-bar-switch-to-next-tab)
+
+(define-key org-mode-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
+(define-key org-mode-map (kbd "M-S-<tab>") 'tab-bar-switch-to-prev-tab)
 
 ;; LaTeX mode bindings
 (define-key LaTeX-mode-map (kbd "C-j") 'evil-window-down)
