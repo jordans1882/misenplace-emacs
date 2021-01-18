@@ -1384,7 +1384,7 @@ R-FUNC: An R function to use on object"
 (define-key global-map (kbd "M-S-j") 'evil-rotate-upwards)
 (define-key global-map (kbd "M-S-k") 'evil-rotate-downwards)
 (define-key global-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
-(define-key global-map (kbd "M-S-<tab>") 'tab-bar-switch-to-prev-tab)
+(define-key global-map (kbd "M-iso-lefttab") 'tab-bar-switch-to-prev-tab)
 (define-key global-map (kbd "M-<RET>") 'open-dashboard-below)
 (define-key global-map (kbd "M-S-<RET>") 'open-dashboard-right) ;; Doesn't work...
 (define-key global-map (kbd "M-S-c") 'evil-window-delete)
