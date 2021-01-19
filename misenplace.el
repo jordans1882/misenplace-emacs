@@ -217,8 +217,8 @@
 (use-package conda
   :ensure t
   :init
-  (setq conda-anaconda-home (expand-file-name "~/anaconda3"))
-  (setq conda-env-home-directory (expand-file-name "~/anaconda3")))
+  (setq conda-anaconda-home (expand-file-name "~/.conda"))
+  (setq conda-env-home-directory (expand-file-name "~/.conda")))
 (use-package command-log-mode)
 (use-package company
   :config
