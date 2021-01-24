@@ -390,6 +390,11 @@
 (use-package flycheck
   :config
   (global-flycheck-mode t)
+
+  ;; Enable for other modes
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+  (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'json-mode-hook 'flycheck-mode)
 )
 (use-package fill-column-indicator)
 (use-package git-gutter
