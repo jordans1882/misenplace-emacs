@@ -35,12 +35,12 @@
 
 ;; Package Management
 ;; Load Cask
-;; (require 'cask "~/.cask/cask.el")
-;; (cask-initialize)
-;; 
-;; ;; Load Pallet
-;; (require 'pallet)
-;; (pallet-mode t)
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+
+;; Load Pallet
+(require 'pallet)
+(pallet-mode t)
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 
 ;; use-package to load and configure packages
