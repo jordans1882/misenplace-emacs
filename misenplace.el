@@ -634,6 +634,7 @@
   "k" (lambda () (interactive) (pdf-view-previous-line-or-previous-page 5))
   "l" 'image-forward-hscroll
   "G" 'pdf-view-last-page)
+
   ;; (define-key pdf-view-mode-map (kbd "C-w C-w") 'evil-window-next)
   ;; Why these no work?
   ;; (define-key pdf-view-mode-map (kbd "g g") 'pdf-view-first-page)
@@ -984,7 +985,6 @@ R-FUNC: An R function to use on object"
   ;; (define-key my-leader-map "tg" 'centaur-tabs-counsel-switch-group)
   ;; (define-key my-leader-map "tH" 'centaur-tabs-move-current-tab-to-left)
   ;; (define-key my-leader-map "tL" 'centaur-tabs-move-current-tab-to-right)
-
   ;; TODO: seem to not use these in favor of tabbar?
   ;; (define-key my-leader-map "Td" 'elscreen-kill)
   ;; (define-key my-leader-map "Tl" 'elscreen-next)
@@ -1413,7 +1413,6 @@ R-FUNC: An R function to use on object"
 (define-key org-mode-map (kbd "C-l") 'evil-window-right)
 (define-key org-mode-map (kbd "C-j") 'evil-window-down)
 (define-key org-mode-map (kbd "C-k") 'evil-window-up)
-
 (define-key org-mode-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
 (define-key org-mode-map (kbd "M-S-<tab>") 'tab-bar-switch-to-prev-tab)
 
@@ -1453,6 +1452,7 @@ BUFFER may be a string or nil."
 
 ;; Transparency functions
 (defun toggle-transparency ()
+  " Toggle transparency of emacs "
   (interactive)
   (if (/=
        (cadr (frame-parameter nil 'alpha))
@@ -1461,18 +1461,22 @@ BUFFER may be a string or nil."
     (set-frame-parameter nil 'alpha '(85 50))))
 
 (defun day ()
+  "Set theme to day"
   (interactive)
   (counsel-load-theme-action "doom-tomorrow-day"))
 
 (defun dusk ()
+  "Set theme to dusk"
   (interactive)
   (counsel-load-theme-action "doom-gruvbox-light"))
 
 (defun evening ()
+  "Set theme to evening"
   (interactive)
   (counsel-load-theme-action "doom-gruvbox"))
 
 (defun night ()
+  "Set theme to night"
   (interactive)
   (counsel-load-theme-action "doom-Iosvkem"))
 
@@ -1505,8 +1509,9 @@ BUFFER may be a string or nil."
         (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
         (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)))
 
-
 (setq vc-follow-symlinks "t")
+
+(setq-default show-trailing-whitespace t)
 
 ;; (define-globalized-minor-mode global-hs-minor-mode
 ;;   hs-minor-mode hs-minor-mode)
