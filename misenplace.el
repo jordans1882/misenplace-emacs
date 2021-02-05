@@ -473,7 +473,20 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package dap-mode)
 (use-package mpc)
-(use-package mu4e)
+(use-package mu4e
+  :ensure nil
+  :config
+
+  (setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail")
+  (setq mu4e-drafts-folder "/[Gmail].Drafts")
+  (setq mu4e-sent-folder "/[Gmail].Drafts")
+  (setq mu4e-refile-folder "/[Gmail].All Mail")
+  (setq mu4e-trash-folder "/[Gmail].Trash")
+  )
+
 (use-package nyan-mode
   :config
   (nyan-mode 1))
