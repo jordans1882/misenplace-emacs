@@ -870,9 +870,12 @@
     (interactive)
     (load-file "~/git_repos/misenplace-emacs/misenplace.el"))
 
-  ;; binding ",e" for emacs
+  ;; binding ",e" for error (flycheck)
   (define-key my-leader-map "e" '("evilnc-prefix"))
-  (define-key my-leader-map "ec" 'evilnc-comment-or-uncomment-lines)
+  (define-key my-leader-map "ej" 'flycheck-next-error)
+  (define-key my-leader-map "ek" 'flycheck-previous-error)
+  (define-key my-leader-map "en" 'flycheck-next-error)
+  (define-key my-leader-map "ep" 'flycheck-previous-error)
 
   ;; binding " f" for files
   (define-key my-localleader-map "f" '("files-prefix"))
@@ -887,6 +890,7 @@
   (define-key my-localleader-map "fer" 'reload-config)
   (define-key my-localleader-map "fev" 'edit-vimrc)
   (define-key my-localleader-map "fey" 'edit-yas-config)
+
   (define-key my-localleader-map "fq" 'treemacs-quit)
   (define-key my-localleader-map "fs" 'treemacs-visit-node-horizontal-split)
   (define-key my-localleader-map "fv" 'treemacs-visit-node-vertical-split)
@@ -921,8 +925,10 @@
   (define-key my-leader-map "gU" 'magit-unstage)
   (define-key my-leader-map "gj" 'git-gutter:next-diff)
   (define-key my-leader-map "gk" 'git-gutter:previous-diff)
-  (define-key my-leader-map "gp" 'magit-pull)
-  (define-key my-leader-map "gP" 'magit-push)
+  (define-key my-leader-map "gn" 'git-gutter:next-diff)
+  (define-key my-leader-map "gp" 'git-gutter:previous-diff)
+  (define-key my-leader-map "g>" 'magit-pull)
+  (define-key my-leader-map "g<" 'magit-push)
 
   ;; binding ",h" for help
   (define-key my-leader-map "h" '("help-prefix"))
@@ -958,6 +964,11 @@
   (define-key my-leader-map "ptf" 'projectile-find-test-file)
   (define-key my-leader-map "p[" 'projectile-previous-project-buffer)
   (define-key my-leader-map "p]" 'projectile-next-project-buffer)
+
+
+  ;; binding ",x" for editing commands
+  (define-key my-leader-map "x" '("edit-prefix"))
+  (define-key my-leader-map "xc" 'evilnc-comment-or-uncomment-lines)
 
   ;; binding ",y" for yasnippets
   (define-key my-leader-map "y" '("yas-prefix"))
@@ -1487,7 +1498,7 @@ BUFFER may be a string or nil."
 
 ;; Transparency functions
 (defun toggle-transparency ()
-  " Toggle transparency of emacs "
+  "Function to toggle transparency of Emacs."
   (interactive)
   (if (/=
        (cadr (frame-parameter nil 'alpha))
