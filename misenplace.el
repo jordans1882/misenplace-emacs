@@ -342,6 +342,10 @@
    ;; (evil-define-key 'normal evil-normal-state-map "," 'my-leader-map)
 
    )
+(use-package evil-collection
+  :config
+  (evil-collection-init)
+  )
 (use-package evil-snipe
   :config
   (evil-snipe-mode +1)
@@ -495,20 +499,43 @@
   (setq ob-mermaid-cli-path "~/mermaid/node_modules/.bin/mmdc"))
 (use-package org
   :config
-   (setq org-latex-pdf-process
- 	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
- 	"bibtex %b"
- 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
- 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
-        )
 
-;;  (setq org-latex-pdf-process
-;;	'("xelatex --shell-escape %f"
-;;	"bibtex %b"
-;;        "xelatex --shell-escape %f"
-;;        "xelatex --shell-escape %f"))
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-latex-image-default-width "")
+  ;;;;;;;;;;;;;;;;;;;;
+  ;; General Config ;;
+  ;;;;;;;;;;;;;;;;;;;;
+
+  ;; Set org-mode for .org files
+  (setq auto-mode-alist (cons '("\\.org" . org-mode)auto-mode-alist))
+
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+
+  ;; Org file location settigns
+  (setq org-directory "~/org/")
+  (setq org-default-notes-file (concat org-directory "/todo.org"))
+
+  ;; Org-agenda settings
+  (setq org-agenda-include-all-todo t)
+  (setq org-agenda-include-diary t)
+
+  ;; Org todo keywords
+  (setq org-todo-keywords
+        '((sequence "PIPELINE"
+                    "TODO"
+                    "DONE")))
+
+  ;;;;;;;;;;;;;;;;;;;;
+  ;; visual configs ;;
+  ;;;;;;;;;;;;;;;;;;;;
+  (setq org-hide-leading-stars t)
+  (setq org-odd-levels-only t)
+
+
+  ;;;;;;;;;;;;;;;;;;;;
+  ;; export configs ;;
+  ;;;;;;;;;;;;;;;;;;;;
+
+  ;; Org-babel
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . nil)
@@ -516,6 +543,16 @@
       (python . t)
       (R . t)))
 
+  ;; Latex
+   (setq org-latex-pdf-process
+ 	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+ 	"bibtex %b"
+ 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+ 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+        )
+
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-latex-image-default-width "")
 (setq org-latex-classes
   '(("article"
      "\\documentclass[11pt]{article}"
@@ -544,16 +581,7 @@
       ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
       ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}"))))
 
-  (setq org-latex-listings t)
-;;   (add-to-list 'org-latex-classes
-;;              '("book"
-;;                "\\documentclass{book}"
-;;                ("\\part{%s}" . "\\part*{%s}")
-;;                ("\\chapter{%s}" . "\\chapter*{%s}")
-;;                ("\\section{%s}" . "\\section*{%s}")
-;;                ("\\subsection{%s}" . "\\subsection*{%s}")
-;;                ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-;;              )
+;; TODO - Add to previous list
   (add-to-list 'org-latex-classes
              '("IEEEtran"
                "\\documentclass{IEEEtran}"
@@ -561,6 +589,34 @@
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
              )
+
+  (setq org-latex-listings t)
+
+  ;; Org for writing a journal
+  (defvar org-journal-file "~/org/journal.org"
+     "Path to OrgMode journal file.")
+  (defvar org-journal-date-format "%Y-%m-%d"
+     "Date format string for journal headings.")
+  (defun org-journal-entry ()
+    "Create a new diary entry for today or append to an existing one."
+    (interactive)
+    (switch-to-buffer (find-file org-journal-file))
+    (widen)
+    (let ((today (format-time-string org-journal-date-format)))
+      (beginning-of-buffer)
+      (unless (org-goto-local-search-headings today nil t)
+        ((lambda ()
+           (org-insert-heading)
+           (insert today)
+           (insert "\n\n  \n"))))
+      (beginning-of-buffer)
+      (org-show-entry)
+      (org-narrow-to-subtree)
+      (end-of-buffer)
+      (backward-char 2)
+      (unless (= (current-column) 2)
+        (insert "\n\n  "))))
+
 
   )
 (use-package ox-reveal
@@ -1188,43 +1244,6 @@ R-FUNC: An R function to use on object"
     kept-new-versions 6
     kept-old-versions 2
     version-control t)
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
-  (add-hook 'org-mode-hook 'flyspell-mode)
-  (setq auto-mode-alist
-  (cons '("\\.org" . org-mode)auto-mode-alist))
-  (setq org-directory "~/org/")
-  (setq org-default-notes-file (concat org-directory "/codex.org"))
-  (setq org-agenda-include-all-todo t)
-  (setq org-agenda-include-diary t)
-  (setq org-hide-leading-stars t)
-  (setq org-odd-levels-only t)
-  (setq org-todo-keywords
-        '((sequence "PIPELINE"
-                    "TODO"
-                    "DONE")))
-  (defvar org-journal-file "~/org/journal.org"
-     "Path to OrgMode journal file.")
-  (defvar org-journal-date-format "%Y-%m-%d"
-     "Date format string for journal headings.")
-  (defun org-journal-entry ()
-    "Create a new diary entry for today or append to an existing one."
-    (interactive)
-    (switch-to-buffer (find-file org-journal-file))
-    (widen)
-    (let ((today (format-time-string org-journal-date-format)))
-      (beginning-of-buffer)
-      (unless (org-goto-local-search-headings today nil t)
-        ((lambda ()
-           (org-insert-heading)
-           (insert today)
-           (insert "\n\n  \n"))))
-      (beginning-of-buffer)
-      (org-show-entry)
-      (org-narrow-to-subtree)
-      (end-of-buffer)
-      (backward-char 2)
-      (unless (= (current-column) 2)
-        (insert "\n\n  "))))
   (defun essh-next-code-line (&optional arg)
     "Move ARG lines of code forward (backward if ARG is negative).
   Skips past all empty and comment lines.	 Default for ARG is 1.
