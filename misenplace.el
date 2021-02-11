@@ -72,77 +72,6 @@
 (use-package ace-jump-mode)
 (use-package cask-mode)
 (use-package cask-mode)
-;; (use-package centaur-tabs
-;;    :config
-;;    (setq centaur-tabs-style "bar"
-;; 	  centaur-tabs-height 32
-;; 	  centaur-tabs-set-icons t
-;; 	  centaur-tabs-set-modified-marker t
-;; 	  centaur-tabs-show-navigation-buttons t
-;; 	  centaur-tabs-set-bar 'under
-;; 	  x-underline-at-descent-line t)
-;;    (centaur-tabs-headline-match)
-;;    ;; (setq centaur-tabs-gray-out-icons 'buffer)
-;;    ;; (centaur-tabs-enable-buffer-reordering)
-;;    ;; (setq centaur-tabs-adjust-buffer-order t)
-;;    (centaur-tabs-mode t)
-;;    (setq uniquify-separator "/")
-;;    (setq uniquify-buffer-name-style 'forward)
-;;    (defun centaur-tabs-buffer-groups ()
-;;      "`centaur-tabs-buffer-groups' control buffers' group rules.
-
-;;  Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-;;  All buffer name start with * will group to \"Emacs\".
-;;  Other buffer group by `centaur-tabs-get-group-name' with project name."
-;;      (list
-;;       (cond
-;; 	;; ((not (eq (file-remote-p (buffer-file-name)) nil))
-;; 	;; "Remote")
-;; 	((or (string-equal "*" (substring (buffer-name) 0 1))
-;; 	     (memq major-mode '(magit-process-mode
-;; 				magit-status-mode
-;; 				magit-diff-mode
-;; 				magit-log-mode
-;; 				magit-file-mode
-;; 				magit-blob-mode
-;; 				magit-blame-mode
-;; 				)))
-;; 	 "Emacs")
-;; 	((derived-mode-p 'prog-mode)
-;; 	 "Editing")
-;; 	((derived-mode-p 'dired-mode)
-;; 	 "Dired")
-;; 	((memq major-mode '(helpful-mode
-;; 			    help-mode))
-;; 	 "Help")
-;; 	((memq major-mode '(org-mode
-;; 			    org-agenda-clockreport-mode
-;; 			    org-src-mode
-;; 			    org-agenda-mode
-;; 			    org-beamer-mode
-;; 			    org-indent-mode
-;; 			    org-bullets-mode
-;; 			    org-cdlatex-mode
-;; 			    org-agenda-log-mode
-;; 			    diary-mode))
-;; 	 "OrgMode")
-;; 	(t
-;; 	 (centaur-tabs-get-group-name (current-buffer))))))
-;;    :hook
-;;    (dashboard-mode . centaur-tabs-local-mode)
-;;    (term-mode . centaur-tabs-local-mode)
-;;    (calendar-mode . centaur-tabs-local-mode)
-;;    (org-agenda-mode . centaur-tabs-local-mode)
-;;    (helpful-mode . centaur-tabs-local-mode)
-;;    :bind
-;;    ("C-<prior>" . centaur-tabs-backward)
-;;    ("C-<next>" . centaur-tabs-forward)
-;;    ("C-c t s" . centaur-tabs-counsel-switch-group)
-;;    ("C-c t p" . centaur-tabs-group-by-projectile-project)
-;;    ("C-c t g" . centaur-tabs-group-buffer-groups)
-;;    (:map evil-normal-state-map
-;; 	  ("g t" . centaur-tabs-forward)
-;; 	  ("g T" . centaur-tabs-backward)))
 (use-package cheatsheet
   :config
   (cheatsheet-add-group 'Common
@@ -815,8 +744,15 @@
 
   ;; binding "SPC-t" for toggles
   (define-key my-second-leader-map "t" '("agenda-prefix"))
-  (define-key my-second-leader-map "tt" 'toggle-transparency)
-  (define-key my-second-leader-map "tt" 'toggle-transparency)
+  ;; toggle theme
+  (define-key my-second-leader-map "ttt" 'toggle-transparency)
+  (define-key my-second-leader-map "ttd" 'day)
+  (define-key my-second-leader-map "ttD" 'dusk)
+  (define-key my-second-leader-map "tte" 'evening)
+  (define-key my-second-leader-map "ttn" 'night)
+  ;; toggle modelines
+  (define-key my-second-leader-map "tM" 'toggle-menu-bar-mode-from-frame)
+  (define-key my-second-leader-map "tm" 'hide-mode-line-mode)
 
   ;; binding for comments
   (define-key my-second-leader-map "c" '("comment-prefix"))
@@ -842,7 +778,9 @@
   (define-key my-leader-map "bb" 'ivy-switch-buffer)
   (define-key my-leader-map "bl" 'next-buffer)
   (define-key my-leader-map "bh" 'previous-buffer)
-  (define-key my-leader-map "bn" 'evil-buffer-new)
+  (define-key my-leader-map "bc" 'evil-buffer-new)
+  (define-key my-leader-map "bn" 'evil-next-buffer)
+  (define-key my-leader-map "bp" 'evil-prev-buffer)
   (define-key my-leader-map "bd" 'evil-delete-buffer)
   (define-key my-leader-map "br" 'rename-buffer)
 
@@ -903,10 +841,13 @@
 
   ;; binding ",h" for help
   (define-key my-leader-map "h" '("help-prefix"))
-  (define-key my-leader-map "hh" 'describe-mode)
+  (define-key my-leader-map "hm" 'describe-mode)
+  (define-key my-leader-map "hf" 'describe-function)
   (define-key my-leader-map "hv" 'describe-variable)
-  (define-key my-leader-map "hm" 'toggle-menu-bar-mode-from-frame)
   (define-key my-leader-map "hc" 'counsel-cheatsheets)
+
+
+(f-append-text (concat (buffer-file-name) "\n") 'utf-8 "~/.emacs.d/agendas.txt")
 
   ;; binding ",j" for jump
   (define-key my-leader-map "j" '("jump-prefix"))
@@ -916,6 +857,14 @@
   (define-key my-leader-map "jj" 'evil-ace-jump-char-mode)
   (define-key my-leader-map "jw" 'evil-ace-jump-word-mode)
   (define-key my-leader-map "jl" 'evil-ace-jump-line-mode)
+
+
+  ;; binding ",o" for org
+  (define-key my-leader-map "o" '("org-prefix"))
+  (define-key my-leader-map "oci" 'org-clock-in)
+  (define-key my-leader-map "oco" 'org-clock-out)
+
+
 
   ;; binding ",p" for projects
   (define-key my-leader-map "p" '("projects-prefix"))
@@ -1001,15 +950,10 @@
   :config
   (yas-global-mode 1)
 
-;;  (setq yas-snippet-dirs
-;;        '("~/.emacs.d/snippets"                 ;; personal snippets
-;;         ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-;;          ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-;;          ;; "/home/jordan/.emacs.d/.cask/26.3/elpa/yasnippet-snippets-20200122.1140/snippets/" ;; the yasmate collection
-;;          ))
+  ;;(setq yas-snippet-dirs '("~/git_repos/misenplace-snippets"))
     )
 (use-package misenplace-snippets
-  :load-path "/home/jordan/.emacs.d/.cask/26.3/elpa/"
+  :load-path "/home/jordan/git_repos/"
   :after yasnippet)
 (use-package slack
   :commands (slack-start)
@@ -1107,6 +1051,32 @@
   (projectile-add-known-project proj-dir)
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   )
+
+
+(defun add-buffer-to-agendas()
+  (interactive)
+  (f-append-text (concat (buffer-file-name) "\n") 'utf-8 "~/.emacs.d/agendas.txt")
+)
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+(defun append-to-list (list-var elements)
+  "Append ELEMENTS to the end of LIST-VAR.
+The return value is the new value of LIST-VAR."
+  (unless (consp elements)
+    (error "ELEMENTS must be a list"))
+  (let ((list (symbol-value list-var)))
+    (if list
+        (setcdr (last list) elements)
+      (set list-var elements)))
+  (symbol-value list-var))
+(defun set-agenda-files ()
+  (interactive)
+  (setq org-agenda-files (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
+
+(set-agenda-files)
 
 ;; TODO: Update python git repo for python projects
 

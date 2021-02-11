@@ -41,8 +41,8 @@
   CLOCK: [2019-11-06 Wed 22:13]--[2019-11-06 Wed 22:13] =>  0:00
   CLOCK: [2019-11-06 Wed 22:00]--[2019-11-06 Wed 22:13] =>  0:13
   :END:
+* DONE add help functionality
 * TODO Decide if org-noter is desired
 * TODO Figure out music player in emacs
 * TODO Decide of browser is worth while
 * TODO Decide if email client is worth while
-* TODO add help functionality
