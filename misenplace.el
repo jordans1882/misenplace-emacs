@@ -857,21 +857,21 @@
   (define-key my-leader-map "ep" 'flycheck-previous-error)
 
   ;; binding " f" for files
-  (define-key my-localleader-map "f" '("files-prefix"))
-  (define-key my-localleader-map "ff" 'treemacs)
-  (define-key my-localleader-map "fc" 'treemacs-create-file)
-  (define-key my-localleader-map "fC" 'treemacs-create-dir)
-  (define-key my-localleader-map "fd" 'treemacs-delete)
-  (define-key my-localleader-map "feb" 'edit-bashrc)
-  (define-key my-localleader-map "fea" 'edit-awesomerc)
-  (define-key my-localleader-map "fee" 'edit-config)
-  (define-key my-localleader-map "feq" 'edit-qutebrowser)
-  (define-key my-localleader-map "fer" 'reload-config)
-  (define-key my-localleader-map "fev" 'edit-vimrc)
-  (define-key my-localleader-map "fey" 'edit-yas-config)
-  (define-key my-localleader-map "fq" 'treemacs-quit)
-  (define-key my-localleader-map "fs" 'treemacs-visit-node-horizontal-split)
-  (define-key my-localleader-map "fv" 'treemacs-visit-node-vertical-split)
+  (define-key my-leader-map "f" '("files-prefix"))
+  (define-key my-leader-map "ff" 'treemacs)
+  (define-key my-leader-map "fc" 'treemacs-create-file)
+  (define-key my-leader-map "fC" 'treemacs-create-dir)
+  (define-key my-leader-map "fd" 'treemacs-delete)
+  (define-key my-leader-map "feb" 'edit-bashrc)
+  (define-key my-leader-map "fea" 'edit-awesomerc)
+  (define-key my-leader-map "fee" 'edit-config)
+  (define-key my-leader-map "feq" 'edit-qutebrowser)
+  (define-key my-leader-map "fer" 'reload-config)
+  (define-key my-leader-map "fev" 'edit-vimrc)
+  (define-key my-leader-map "fey" 'edit-yas-config)
+  (define-key my-leader-map "fq" 'treemacs-quit)
+  (define-key my-leader-map "fs" 'treemacs-visit-node-horizontal-split)
+  (define-key my-leader-map "fv" 'treemacs-visit-node-vertical-split)
 
   ;; binding ",g" for git
   (define-key my-leader-map "g" '("git-prefix"))
@@ -983,8 +983,6 @@
   (define-key my-leader-map "y" '("yas-prefix"))
   (define-key my-leader-map "yy" 'yas-insert-snippet)
   )
-
-
 (use-package ws-butler
   :config
   (add-hook 'prog-mode-hook #'ws-butler-mode))
