@@ -1073,6 +1073,7 @@ The return value is the new value of LIST-VAR."
       (set list-var elements)))
   (symbol-value list-var))
 (defun append-agenda-files ()
+  (setq org-agenda-files (s-split " " (s-replace "~/" "/home/jordan/" (s-join " " org-agenda-files))))
   (setq org-agenda-files (remove-duplicates (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
   (setq org-agenda-files (delete-dups org-agenda-files)))
 (defun set-agenda-files ()
