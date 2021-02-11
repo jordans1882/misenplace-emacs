@@ -585,7 +585,7 @@
   (progn
     (org-projectile-per-project)
     (setq org-projectile-per-project-filepath "todo.org")
-    (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    ;; (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
     (global-set-key (kbd "C-c c") 'org-capture)
     (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)))
 (use-package polymode
@@ -1073,7 +1073,8 @@ The return value is the new value of LIST-VAR."
       (set list-var elements)))
   (symbol-value list-var))
 (defun append-agenda-files ()
-  (setq org-agenda-files (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
+  (setq org-agenda-files (remove-duplicates (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
+  (setq org-agenda-files (delete-dups org-agenda-files)))
 (defun set-agenda-files ()
   (interactive)
   (append-agenda-files)
