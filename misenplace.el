@@ -1,3 +1,5 @@
+;; -*- mode: lisp-interaction;  -*-
+
 ;;; misenplace.el --- A simple vim-style Emacs configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019 Jordan Schupbach
@@ -27,7 +29,7 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-;;; Comentary:
+;;; Commentary: These are my own configs for emacs in package forkm
 
 ;; This package
 
@@ -35,6 +37,8 @@
 
 ;; Package Management
 ;; Load Cask
+
+
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
@@ -1560,11 +1564,6 @@ BUFFER may be a string or nil."
 (setq vc-follow-symlinks "t")
 
 (setq-default show-trailing-whitespace t)
-
-;; (define-globalized-minor-mode global-hs-minor-mode
-;;   hs-minor-mode hs-minor-mode)
-;; 
-;; (global-hs-minor-mode 1)
 
 
 ;;; misenplace.el ends here
