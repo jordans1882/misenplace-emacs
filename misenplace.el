@@ -847,8 +847,6 @@
   (define-key my-leader-map "dp" 'dumb-jump-go-prompt)
   (define-key my-leader-map "dq" 'dumb-jump-quick-look)
 
-  ;; binding ",e" for emacs
-
   ;; binding ",e" for error (flycheck)
   (define-key my-leader-map "e" '("evilnc-prefix"))
   (define-key my-leader-map "ee" 'flycheck-list-errors)
@@ -871,28 +869,9 @@
   (define-key my-localleader-map "fer" 'reload-config)
   (define-key my-localleader-map "fev" 'edit-vimrc)
   (define-key my-localleader-map "fey" 'edit-yas-config)
-
   (define-key my-localleader-map "fq" 'treemacs-quit)
   (define-key my-localleader-map "fs" 'treemacs-visit-node-horizontal-split)
   (define-key my-localleader-map "fv" 'treemacs-visit-node-vertical-split)
-
-  
-  ;; binding ",f" for files
-  (define-key my-leader-map "f" '("files-prefix"))
-  (define-key my-leader-map "ff" 'treemacs)
-  (define-key my-leader-map "fc" 'treemacs-create-file)
-  (define-key my-leader-map "fC" 'treemacs-create-dir)
-  (define-key my-leader-map "fd" 'treemacs-delete)
-  (define-key my-leader-map "feb" 'edit-bashrc)
-  (define-key my-leader-map "fea" 'edit-awesomerc)
-  (define-key my-leader-map "fee" 'edit-config)
-  (define-key my-leader-map "feq" 'edit-qutebrowser)
-  (define-key my-leader-map "fer" 'reload-config)
-  (define-key my-leader-map "fev" 'edit-vimrc)
-  (define-key my-leader-map "fey" 'edit-yas-config)
-  (define-key my-leader-map "fq" 'treemacs-quit)
-  (define-key my-leader-map "fs" 'treemacs-visit-node-horizontal-split)
-  (define-key my-leader-map "fv" 'treemacs-visit-node-vertical-split)
 
   ;; binding ",g" for git
   (define-key my-leader-map "g" '("git-prefix"))
@@ -946,72 +925,6 @@
   (define-key my-leader-map "p[" 'projectile-previous-project-buffer)
   (define-key my-leader-map "p]" 'projectile-next-project-buffer)
 
-  ;; binding ",x" for editing commands
-  (define-key my-leader-map "x" '("edit-prefix"))
-  (define-key my-leader-map "xc" 'evilnc-comment-or-uncomment-lines)
-
-  ;; binding ",w" for window editing commands
-  (define-key my-leader-map "w-" 'evil-window-split)
-  (define-key my-leader-map "w|" 'evil-window-vsplit)
-  (define-key my-leader-map "w=" 'balance-windows)
-
-
-  ;; binding ",y" for yasnippets
-  (define-key my-leader-map "y" '("yas-prefix"))
-  (define-key my-leader-map "yy" 'yas-insert-snippet)
-
-
-  (defun ess-r-display-structure (&optional arg)
-  "Interface for `devtools::build()'.
-With prefix ARG, build with 'vignettes = FALSE'."
-  (interactive "P")
-  (ess-r-package-eval-linewise
-   "devtools::build(%s)\n" "Building %s" arg
-   '("" "vignettes = FALSE")))
-
-
-  (defun asb-read-into-string (buffer)
-  (with-current-buffer buffer
-    (buffer-string)))
-
-(defun asb-ess-R-object-popup (r-func)
-  "R-FUNC: The R function to use on the object.
-Run R-FUN for object at point, and display results in a popup."
-  (let ((objname (current-word))
-        (tmpbuf (get-buffer-create "**ess-R-object-popup**")))
-    (if objname
-        (progn
-          (ess-command (concat "class(" objname ")\n") tmpbuf)
-          (let ((bs (asb-read-into-string tmpbuf)))
-            (if (not(string-match "\(object .* not found\)\|unexpected" bs))
-                (progn
-                  (ess-command (concat r-func "(" objname ")\n") tmpbuf)
-                  (let ((bs (asb-read-into-string tmpbuf)))
-                    (popup-tip bs
-		       :scroll-bar t)))))))
-  (kill-buffer tmpbuf)))
-
-(defun asb-ess-R-object-popup-str ()
-  "Popup structure of R object."
-  (interactive)
-  (asb-ess-R-object-popup "str"))
-
-(defun asb-ess-R-object-popup-cls ()
-  "Popup class of R object."
-  (interactive)
-  (asb-ess-R-object-popup "class"))
-
-
-(defun asb-ess-R-object-popup-interactive (r-func)
-  "R Object Interactive Popup.
-R-FUNC: An R function to use on object"
-  (interactive "sR function to execute: ")
-  (asb-ess-R-object-popup r-func))
-
-;; (evil-leader/set-key-for-mode 'ess-mode "ei" 'asb-ess-R-object-popup-str)
-;; (evil-leader/set-key-for-mode 'ess-mode "eI"
-;;   'asb-ess-R-object-popup-interactive)
-
   ;; binding ",r" for R programming language
   (define-key my-leader-map "rpb" 'ess-r-devtools-build)
   (define-key my-leader-map "rpc" 'ess-r-devtools-check-package)
@@ -1030,9 +943,6 @@ R-FUNC: An R function to use on object"
   (define-key my-leader-map "rq" 'ess-watch-quit)
 
   ;; binding ",t" for tabs
-  ;;(define-key my-leader-map "tr" 'ess-build-tags-for-directory)
-
-
   (define-key my-leader-map "tt" 'tab-bar-select-tab-by-name)
   (define-key my-leader-map "tT" 'toggle-tab-bar-mode-from-frame)
   (define-key my-leader-map "tc" 'tab-bar-new-tab)
@@ -1041,29 +951,6 @@ R-FUNC: An R function to use on object"
   (define-key my-leader-map "th" 'tab-bar-switch-to-prev-tab)
   (define-key my-leader-map "tr" 'tab-bar-rename-tab)
   (define-key my-leader-map "tL" 'tab-bar-move-tab)
-
-  ;; ;; Old centaur tabs bindigns
-  ;; (define-key my-leader-map "tt" 'centaur-tabs-toggle-groups)
-  ;; (define-key my-leader-map "th" 'centaur-tabs-backward)
-  ;; (define-key my-leader-map "tl" 'centaur-tabs-forward)
-  ;; (define-key my-leader-map "tp" 'centaur-tabs-backward-tab)
-  ;; (define-key my-leader-map "tP" 'centaur-tabs-group-by-projectile-project)
-  ;; (define-key my-leader-map "tn" 'centaur-tabs-forward-tab)
-  ;; (define-key my-leader-map "tg" 'centaur-tabs-counsel-switch-group)
-  ;; (define-key my-leader-map "tH" 'centaur-tabs-move-current-tab-to-left)
-  ;; (define-key my-leader-map "tL" 'centaur-tabs-move-current-tab-to-right)
-  ;; TODO: seem to not use these in favor of tabbar?
-  ;; (define-key my-leader-map "Td" 'elscreen-kill)
-  ;; (define-key my-leader-map "Tl" 'elscreen-next)
-  ;; (define-key my-leader-map "Th" 'elscreen-previous)
-  ;; (define-key my-leader-map "Tn" 'elscreen-create)
-  ;; (define-key my-leader-map "Tr" 'elscreen-screen-nickname)
-  ;; (define-key my-leader-map "Tt" 'elscreen-toggle)
-  ;; (define-key my-leader-map "Ts" 'elscreen-swap)
-
-  ;; binding ",x" for edit?
-  (define-key my-leader-map "xi" 'text-scale-increase)
-  (define-key my-leader-map "xd" 'text-scale-decrease)
 
   ;; binding ",w" for windows
   (define-key my-leader-map "wd" 'evil-window-delete)
@@ -1081,7 +968,23 @@ R-FUNC: An R function to use on object"
   (define-key my-leader-map "wJ" 'evil-window-decrease-height)
   (define-key my-leader-map "wK" 'evil-window-increase-height)
   (define-key my-leader-map "wH" 'evil-window-decrease-width)
-  (define-key my-leader-map "wL" 'evil-window-increase-width))
+  (define-key my-leader-map "wL" 'evil-window-increase-width)
+  (define-key my-leader-map "w-" 'evil-window-split)
+  (define-key my-leader-map "w|" 'evil-window-vsplit)
+  (define-key my-leader-map "w=" 'balance-windows)
+
+  ;; binding ",x" for edit commands
+  (define-key my-leader-map "x" '("edit-prefix"))
+  (define-key my-leader-map "xc" 'evilnc-comment-or-uncomment-lines)
+  (define-key my-leader-map "xi" 'text-scale-increase)
+  (define-key my-leader-map "xd" 'text-scale-decrease)
+
+  ;; binding ",y" for yasnippets
+  (define-key my-leader-map "y" '("yas-prefix"))
+  (define-key my-leader-map "yy" 'yas-insert-snippet)
+  )
+
+
 (use-package ws-butler
   :config
   (add-hook 'prog-mode-hook #'ws-butler-mode))
@@ -1474,6 +1377,51 @@ BUFFER may be a string or nil."
   (process-send-string target-buffer com)
   (next-line)
   )
+
+;; R language helper funs
+(defun ess-r-display-structure (&optional arg)
+"Interface for `devtools::build()'.
+th prefix ARG, build with 'vignettes = FALSE'."
+(interactive "P")
+(ess-r-package-eval-linewise
+ "devtools::build(%s)\n" "Building %s" arg
+ '("" "vignettes = FALSE")))
+(defun asb-read-into-string (buffer)
+(with-current-buffer buffer
+  (buffer-string)))
+(defun asb-ess-R-object-popup (r-func)
+  "R-FUNC: The R function to use on the object.
+Run R-FUN for object at point, and display results in a popup."
+  (let ((objname (current-word))
+        (tmpbuf (get-buffer-create "**ess-R-object-popup**")))
+    (if objname
+        (progn
+          (ess-command (concat "class(" objname ")\n") tmpbuf)
+          (let ((bs (asb-read-into-string tmpbuf)))
+            (if (not(string-match "\(object .* not found\)\|unexpected" bs))
+                (progn
+                  (ess-command (concat r-func "(" objname ")\n") tmpbuf)
+                  (let ((bs (asb-read-into-string tmpbuf)))
+                    (popup-tip bs
+		       :scroll-bar t)))))))
+  (kill-buffer tmpbuf)))
+(defun asb-ess-R-object-popup-str ()
+  "Popup structure of R object."
+  (interactive)
+  (asb-ess-R-object-popup "str"))
+(defun asb-ess-R-object-popup-cls ()
+  "Popup class of R object."
+  (interactive)
+  (asb-ess-R-object-popup "class"))
+(defun asb-ess-R-object-popup-interactive (r-func)
+  "R Object Interactive Popup.
+R-FUNC: An R function to use on object"
+  (interactive "sR function to execute: ")
+  (asb-ess-R-object-popup r-func))
+;; (evil-leader/set-key-for-mode 'ess-mode "ei" 'asb-ess-R-object-popup-str)
+;; (evil-leader/set-key-for-mode 'ess-mode "eI"
+;;   'asb-ess-R-object-popup-interactive)
+
 
 ;; TODO... change these to mode map bindings?
 (global-set-key (kbd "C-SPC") (lambda () (interactive) (send-line-to-target-process)))
