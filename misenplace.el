@@ -333,6 +333,8 @@
    ;; binding "," to the keymap
    (define-key evil-normal-state-map "," my-leader-map)
    (define-key evil-normal-state-map " " my-second-leader-map)
+   (define-key evil-visual-state-map "," my-leader-map)
+   (define-key evil-visual-state-map " " my-second-leader-map)
    (define-key evil-normal-state-map (kbd "/") 'swiper)
    (define-key evil-normal-state-map (kbd "?") 'swiper-backward)
 
@@ -811,9 +813,14 @@
   :config
   (which-key-mode)
 
-  ;; binding "SPC-t" for toggle
+  ;; binding "SPC-t" for toggles
   (define-key my-second-leader-map "t" '("agenda-prefix"))
   (define-key my-second-leader-map "tt" 'toggle-transparency)
+  (define-key my-second-leader-map "tt" 'toggle-transparency)
+
+  ;; binding for comments
+  (define-key my-second-leader-map "c" '("comment-prefix"))
+  (define-key my-second-leader-map "cc" 'evilnc-comment-or-uncomment-lines)
 
   ;; binding ",a" for agenda (todo manager)
   (define-key my-leader-map "a" '("agenda-prefix"))
