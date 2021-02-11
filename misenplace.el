@@ -1072,11 +1072,13 @@ The return value is the new value of LIST-VAR."
         (setcdr (last list) elements)
       (set list-var elements)))
   (symbol-value list-var))
+(defun append-agenda-files ()
+  (setq org-agenda-files (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
 (defun set-agenda-files ()
   (interactive)
-  (setq org-agenda-files (append (org-agenda-files) (read-lines "~/.emacs.d/agendas.txt"))))
-
-(set-agenda-files)
+  (append-agenda-files)
+  )
+(append-agenda-files)
 
 ;; TODO: Update python git repo for python projects
 
