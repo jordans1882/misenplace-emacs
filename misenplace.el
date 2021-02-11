@@ -314,7 +314,7 @@
    ;; Create user keymap (personal leader)
    (defvar my-leader-map (make-sparse-keymap)
      "Keymap for \"leader key\" shortcuts.")
-   (defvar my-localleader-map (make-sparse-keymap)
+   (defvar my-second-leader-map (make-sparse-keymap)
      "Keymap for \"leader key\" shortcuts.")
 
    (define-key my-leader-map "wd" 'evil-window-delete)
@@ -332,13 +332,13 @@
    ;; (define-key evil-normal-state-map (kbd "C-c C-c") 'evilnc-comment-or-uncomment-lines)
    ;; binding "," to the keymap
    (define-key evil-normal-state-map "," my-leader-map)
-   (define-key evil-normal-state-map " " my-localleader-map)
+   (define-key evil-normal-state-map "SPC" my-second-leader-map)
    (define-key evil-normal-state-map (kbd "/") 'swiper)
    (define-key evil-normal-state-map (kbd "?") 'swiper-backward)
 
    ;; Manually add in my-leader-map bindings to states
    (define-key compilation-mode-map "," my-leader-map)
-   (define-key compilation-mode-map " " my-localleader-map)
+   (define-key compilation-mode-map "SPC" my-second-leader-map)
 
    ;; (define-key inferior-ess-mode-map "," my-leader-map)
    ;; (evil-define-key 'normal evil-normal-state-map "," 'my-leader-map)
@@ -810,6 +810,10 @@
 (use-package which-key
   :config
   (which-key-mode)
+
+  ;; binding "SPC-t" for toggle
+  (define-key my-second-leader-map "t" '("agenda-prefix"))
+  (define-key my-second-leader-map "tt" 'toggle-transparency)
 
   ;; binding ",a" for agenda (todo manager)
   (define-key my-leader-map "a" '("agenda-prefix"))
