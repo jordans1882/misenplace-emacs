@@ -1,5 +1,3 @@
-;; -*- mode: lisp-interaction;  -*-
-
 ;;; misenplace.el --- A simple vim-style Emacs configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019 Jordan Schupbach
@@ -37,7 +35,6 @@
 
 ;; Package Management
 ;; Load Cask
-
 
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
@@ -429,7 +426,6 @@
     (add-hook 'c-mode-hook 'irony-mode)
     (add-hook 'objc-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
 (use-package lorem-ipsum)
 ;; (use-package lsp-mode
 ;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -495,7 +491,6 @@
   (setq mu4e-refile-folder "/[Gmail].All Mail")
   (setq mu4e-trash-folder "/[Gmail].Trash")
   )
-
 (use-package nyan-mode
   :config
   (nyan-mode 1))
@@ -853,30 +848,11 @@
   (define-key my-leader-map "dq" 'dumb-jump-quick-look)
 
   ;; binding ",e" for emacs
-  (defun edit-config ()
-    (interactive)
-    (find-file "~/git_repos/misenplace-emacs/misenplace.el"))
-  (defun edit-bashrc ()
-    (interactive)
-    (find-file "~/.bashrc"))
-  (defun edit-awesomerc ()
-    (interactive)
-    (find-file "~/.config/awesome/rc.lua"))
-  (defun edit-vimrc ()
-    (interactive)
-    (find-file "~/.vimrc"))
-  (defun edit-qutebrowser ()
-    (interactive)
-    (find-file "~/.config/qutebrowser/config.py"))
-  (defun edit-yas-config ()
-    (interactive)
-    (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
-  (defun reload-config ()
-    (interactive)
-    (load-file "~/git_repos/misenplace-emacs/misenplace.el"))
 
   ;; binding ",e" for error (flycheck)
   (define-key my-leader-map "e" '("evilnc-prefix"))
+  (define-key my-leader-map "ee" 'flycheck-list-errors)
+  (define-key my-leader-map "e/" 'counsel-flycheck)
   (define-key my-leader-map "ej" 'flycheck-next-error)
   (define-key my-leader-map "ek" 'flycheck-previous-error)
   (define-key my-leader-map "en" 'flycheck-next-error)
@@ -970,14 +946,20 @@
   (define-key my-leader-map "p[" 'projectile-previous-project-buffer)
   (define-key my-leader-map "p]" 'projectile-next-project-buffer)
 
-
   ;; binding ",x" for editing commands
   (define-key my-leader-map "x" '("edit-prefix"))
   (define-key my-leader-map "xc" 'evilnc-comment-or-uncomment-lines)
 
+  ;; binding ",w" for window editing commands
+  (define-key my-leader-map "w-" 'evil-window-split)
+  (define-key my-leader-map "w|" 'evil-window-vsplit)
+  (define-key my-leader-map "w=" 'balance-windows)
+
+
   ;; binding ",y" for yasnippets
   (define-key my-leader-map "y" '("yas-prefix"))
   (define-key my-leader-map "yy" 'yas-insert-snippet)
+
 
   (defun ess-r-display-structure (&optional arg)
   "Interface for `devtools::build()'.
@@ -1100,9 +1082,6 @@ R-FUNC: An R function to use on object"
   (define-key my-leader-map "wK" 'evil-window-increase-height)
   (define-key my-leader-map "wH" 'evil-window-decrease-width)
   (define-key my-leader-map "wL" 'evil-window-increase-width))
-  (define-key my-leader-map "w-" 'evil-window-split)
-  (define-key my-leader-map "w|" 'evil-window-vsplit)
-  (define-key my-leader-map "w=" 'balance-windows)
 (use-package ws-butler
   :config
   (add-hook 'prog-mode-hook #'ws-butler-mode))
@@ -1155,6 +1134,8 @@ R-FUNC: An R function to use on object"
 ;; User-defined functions
 
 ;; Project creation functions
+
+;; Project Creation funs
 (defun make-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1169,7 +1150,6 @@ R-FUNC: An R function to use on object"
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   (magit-init projectdir)
   )
-
 (defun make-cpp-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1185,7 +1165,6 @@ R-FUNC: An R function to use on object"
   (projectile-add-known-project proj-dir)
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   )
-
 (defun make-r-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1201,7 +1180,6 @@ R-FUNC: An R function to use on object"
   (projectile-add-known-project proj-dir)
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   )
-
 (defun make-python-project ()
   "Prompt user to enter a directory name and create project."
   (interactive)
@@ -1217,6 +1195,7 @@ R-FUNC: An R function to use on object"
   (projectile-add-known-project proj-dir)
   ;; (treemacs-add-project-to-workspace projectdir projectname) ;; todo: figure out issue
   )
+
 ;; TODO: Update python git repo for python projects
 
 
@@ -1426,7 +1405,6 @@ R-FUNC: An R function to use on object"
 
 (basic-config)
 
-
 ;;;; Some key bindings
 (define-key lisp-interaction-mode-map (kbd "<C-return>") 'eval-defun)
 
@@ -1497,7 +1475,6 @@ BUFFER may be a string or nil."
   (next-line)
   )
 
-
 ;; TODO... change these to mode map bindings?
 (global-set-key (kbd "C-SPC") (lambda () (interactive) (send-line-to-target-process)))
 
@@ -1511,21 +1488,19 @@ BUFFER may be a string or nil."
       (set-frame-parameter nil 'alpha '(100 100))
     (set-frame-parameter nil 'alpha '(85 50))))
 
+;; Define color themes switcher funs
 (defun day ()
   "Set theme to day"
   (interactive)
   (counsel-load-theme-action "doom-tomorrow-day"))
-
 (defun dusk ()
   "Set theme to dusk"
   (interactive)
   (counsel-load-theme-action "doom-gruvbox-light"))
-
 (defun evening ()
   "Set theme to evening"
   (interactive)
   (counsel-load-theme-action "doom-gruvbox"))
-
 (defun night ()
   "Set theme to night"
   (interactive)
@@ -1543,11 +1518,31 @@ BUFFER may be a string or nil."
   (other-window 1)
   (switch-to-buffer "*dashboard*"))
 
-(provide 'misenplace)
+;; Config editing helper funs
+(defun edit-config ()
+  (interactive)
+  (find-file "~/git_repos/misenplace-emacs/misenplace.el"))
+(defun edit-bashrc ()
+  (interactive)
+  (find-file "~/.bashrc"))
+(defun edit-awesomerc ()
+  (interactive)
+  (find-file "~/.config/awesome/rc.lua"))
+(defun edit-vimrc ()
+  (interactive)
+  (find-file "~/.vimrc"))
+(defun edit-qutebrowser ()
+  (interactive)
+  (find-file "~/.config/qutebrowser/config.py"))
+(defun edit-yas-config ()
+  (interactive)
+  (find-file "~/git_repos/misenplace-snippets/misenplace-snippets.el"))
+(defun reload-config ()
+  (interactive)
+  (load-file "~/git_repos/misenplace-emacs/misenplace.el"))
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
-
 (use-package counsel-gtags
   :config
 
@@ -1559,10 +1554,15 @@ BUFFER may be a string or nil."
         (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
         (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
         (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)))
-
 (setq vc-follow-symlinks "t")
-
 (setq-default show-trailing-whitespace t)
 
+(provide 'misenplace)
 
+;; Move these above provide statment?
 ;;; misenplace.el ends here
+
+;; Local Variables:
+;; mode: lisp-interaction
+;; eval: (hs-minor-mode t)
+;; End:
