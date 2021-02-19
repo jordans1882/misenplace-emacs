@@ -1,0 +1,16 @@
+* Tasks
+*** TODO Add bindings for org
+    [2021-02-10 Wed]
+    [[file:~/git_repos/misenplace-emacs/misenplace.el::;; binding ",o" for org]]
+
+****    evil bindings
+     incr, decr, heading level
+     incr, decr, keyword level
+     toggle clock-in/out
+****    which-key bindings
+     incr, decr, heading level
+     incr, decr, keyword level
+     toggle clock-in/out
+*** TODO Figure out how to change todo filenames to incorporate project name
+    [2021-02-11 Thu]
+    [[file:~/git_repos/misenplace-emacs/misenplace.el::(setq org-projectile-per-project-filepath "todo.org")]]
