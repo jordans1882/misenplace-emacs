@@ -1306,8 +1306,8 @@ The return value is the new value of LIST-VAR."
 (define-key global-map (kbd "M-S-k") 'evil-rotate-downwards)
 (define-key global-map (kbd "M-<tab>") 'tab-bar-switch-to-next-tab)
 ;; (define-key global-map (kbd "M-iso-lefttab") 'tab-bar-switch-to-prev-tab)
-(define-key global-map (kbd "M-<RET>") 'open-dashboard-below)
-(define-key global-map (kbd "M-S-<RET>") 'open-dashboard-right) ;; Doesn't work...
+;; (define-key global-map (kbd "M-<RET>") 'open-dashboard-below)
+;; (define-key global-map (kbd "M-S-<RET>") 'open-dashboard-right) ;; Doesn't work...
 (define-key global-map (kbd "M-S-c") 'evil-window-delete)
 (define-key global-map (kbd "M-q") 'evil-window-delete)
 ;; (define-key global-map (kbd "C-S-J") 'edwina-swap-next-window)
@@ -1333,6 +1333,8 @@ The return value is the new value of LIST-VAR."
 
 ;; LaTeX mode bindings
 (define-key LaTeX-mode-map (kbd "C-j") 'evil-window-down)
+
+(define-key python-mode-map (kbd "M-<RET>") 'elpy-shell-send-statement-and-step)
 
 
 ;; General Coding utilities
