@@ -1333,7 +1333,6 @@ The return value is the new value of LIST-VAR."
 
 ;; LaTeX mode bindings
 (define-key LaTeX-mode-map (kbd "C-j") 'evil-window-down)
-
 (define-key python-mode-map (kbd "M-<RET>") 'elpy-shell-send-statement-and-step)
 
 
