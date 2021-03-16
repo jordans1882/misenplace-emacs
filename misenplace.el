@@ -291,6 +291,8 @@
 
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "M-<RET>") 'ess-eval-region-or-line-visibly-and-step)))
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "C-S-<RET>") 'ess-eval-region-or-function-or-paragraph-and-step)))
+  (define-key inferior-ess-r-mode-map (kbd "C-w C-w") 'evil-window-next)
+
   ;;(eval-after-load 'ess
   ;;                  '(define-key evil-visual-state-map (kbd "<C-return>") 'ess-eval-region-or-line-visibly-and-step)
 
@@ -1289,10 +1291,11 @@ The return value is the new value of LIST-VAR."
 
   )
 
-(basic-config)
+;; (basic-config)
 
 ;;;; Some key bindings
 (define-key lisp-interaction-mode-map (kbd "<C-return>") 'eval-defun)
+(define-key lisp-interaction-mode-map (kbd "M-<RET>") 'eval-defun)
 
 ;; Global bindings
 (define-key global-map (kbd "C-=") 'text-scale-increase)
@@ -1335,6 +1338,9 @@ The return value is the new value of LIST-VAR."
 (define-key LaTeX-mode-map (kbd "C-j") 'evil-window-down)
 (define-key python-mode-map (kbd "M-<RET>") 'elpy-shell-send-statement-and-step)
 
+;; (define-key ess-mode-map (kbd "K") 'elpy-shell-send-statement-and-step)
+
+(add-hook 'ess-mode-hook (lambda () (define-key evil-normal-state-map (kbd "K") 'ess-display-help-on-object)))
 
 ;; General Coding utilities
 
