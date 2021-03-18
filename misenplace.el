@@ -291,7 +291,9 @@
 
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "M-<RET>") 'ess-eval-region-or-line-visibly-and-step)))
   (add-hook 'ess-mode-hook '(lambda () (define-key ess-mode-map (kbd "C-S-<RET>") 'ess-eval-region-or-function-or-paragraph-and-step)))
-  (define-key inferior-ess-r-mode-map (kbd "C-w C-w") 'evil-window-next)
+
+  ;; TODO... look into this
+  ;; (define-key inferior-ess-r-mode-map (kbd "C-w C-w") 'evil-window-next)
 
   ;;(eval-after-load 'ess
   ;;                  '(define-key evil-visual-state-map (kbd "<C-return>") 'ess-eval-region-or-line-visibly-and-step)
