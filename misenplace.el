@@ -1300,6 +1300,11 @@ The return value is the new value of LIST-VAR."
 (define-key lisp-interaction-mode-map (kbd "M-<RET>") 'eval-defun)
 
 ;; Global bindings
+
+(define-key global-map (kbd "M-C-j") 'evil-window-decrease-height)
+(define-key global-map (kbd "M-C-k") 'evil-window-increase-height)
+(define-key global-map (kbd "M-C-h") 'evil-window-decrease-width)
+(define-key global-map (kbd "M-C-l") 'evil-window-increase-width)
 (define-key global-map (kbd "C-=") 'text-scale-increase)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
